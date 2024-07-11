@@ -1,6 +1,7 @@
 package com.atividade.atividade.entities;
 
 import com.atividade.atividade.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.util.Objects;
 public class OrderItem implements Serializable {
 
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
@@ -24,6 +25,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }
@@ -31,6 +33,7 @@ public class OrderItem implements Serializable {
     public void setOrder(Order order){
         id.setOrder(order);
     }
+
 
     public Product getProduct(){
         return id.getProduct();
